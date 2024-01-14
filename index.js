@@ -1,6 +1,6 @@
 $("#stdrollNo").focus();
 
-var connToken ="90931829|-31949306940632996|90960671";
+var connToken ="90931829|-31949307156508130|90960656";
 var dbName ="SCHOOL-DB";
 var relName ="STUDENT-TABLE";
 
@@ -68,12 +68,12 @@ function savetolocalStorage(jsonObj) {
 
 function fillData(jsonObj) {
     savetolocalStorage(jsonObj);
-    var record = JSON.parse(jsonObj.data).record;
-    $("#stdName").val(record.stdName);
-    $("#stdClass").val(record.stdClass);
-    $("#stdDOB").val(record.stdDOB);
-    $("#stdAddress").val(record.stdAddress);
-    $("#stdEnrDate").val(record.stdEnrDate);
+    var recordData = JSON.parse(jsonObj.data).record;
+    $("#stdName").val(recordData.stdName);
+    $("#stdClass").val(recordData.stdClass);
+    $("#stdDOB").val(recordData.stdDOB);
+    $("#stdAddress").val(recordData.stdAddress);
+    $("#stdEnrDate").val(recordData.stdEnrDate);
 }
 
 function getData() {
