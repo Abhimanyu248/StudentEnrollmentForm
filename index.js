@@ -105,6 +105,7 @@ function resetForm() {
     $("#stdDOB").val("");
     $("#stdAddress").val("");
     $("#stdEnrDate").val("");
+    $("#stdrollNo").prop("disabled", false);
     $("#stdrollNo").focus();
     $("#Save").prop("disabled", true);
     $("#Change").prop("disabled", true);
