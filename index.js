@@ -78,13 +78,11 @@ function fillData(jsonObj) {
 
 function getData() {
     var stdRollNoJsonObj = getrollNoJson();
-    console.log(stdRollNoJsonObj);
-    var getReqStr = createGETRequest(connToken,dbName, relName, stdRollNoJsonObj);
+    var getReqStr = createGET_BY_KEYRequest(connToken,dbName, relName, stdRollNoJsonObj);
     jQuery.ajaxSetup({ async: false });
     var resultObj = executeCommandAtGivenBaseUrl(getReqStr, "http://api.login2explore.com:5577", "/api/irl");
     jQuery.ajaxSetup({ async: true });
-    console.log(resultObj);
-     console.log("failed");
+     
     if (resultObj.status === 400 ) {
         $("#Save").prop("disabled", false);
         $("#Reset").prop("disabled", false);
@@ -95,9 +93,7 @@ function getData() {
         fillData(resultObj);
         $("#Change").prop("disabled", false);
         $("#Reset").prop("disabled", false);
-        $("#stdName").focus();
     }
-    console.log("end");
 
 }
 
@@ -109,15 +105,11 @@ function resetForm() {
     $("#stdDOB").val("");
     $("#stdAddress").val("");
     $("#stdEnrDate").val("");
+    $("#stdrollNo").focus();
     $("#Save").prop("disabled", true);
     $("#Change").prop("disabled", true);
     $("#Reset").prop("disabled", true);
-    $("#stdName").prop("disabled", true);
-    $("#stdClass").prop("disabled", true);
-    $("#stdDOB").prop("disabled", true);
-    $("#stdAddress").prop("disabled", true);
-    $("#stdEnrDate").prop("disabled", true);
-    $("#stdrollNo").focus();
+    
 }
 
 function saveData() {
@@ -127,18 +119,15 @@ function saveData() {
     }
     var putReqStr = createPUTRequest(connToken, jsonStr, dbName, relName);
     jQuery.ajaxSetup({ async: false });
-    var resultObj = executeCommand(putReqStr, "http://api.login2explore.com:5577", "/api/iml");
+    var resultObj = executeCommandAtGivenBaseUrl(putReqStr, "http://api.login2explore.com:5577", "/api/iml");
     jQuery.ajaxSetup({ async: true });
     resetForm();
-    $("#stdrollNo").focus();
 }
 function changeData() {
-    $("#Change").prop("disabled", true);
     jsonChange = validateAndGetFormData();
-    var putReqStr = createPUTRequest(connToken, jsonChange, dbName, relName, localStorage.getItem("recordno"));
+    var putReqStr = createUPDATERecordRequest(connToken, jsonChange, dbName, relName, localStorage.getItem("recordno"));
     jQuery.ajaxSetup({ async: false });
-    var resultObj = executeCommand(putReqStr, "http://api.login2explore.com:5577", "/api/iml");
+    var resultObj = executeCommandAtGivenBaseUrl(putReqStr, "http://api.login2explore.com:5577", "/api/iml");
     jQuery.ajaxSetup({ async: true });
     resetForm();
-    $("#stdrollNo").focus();
 }
